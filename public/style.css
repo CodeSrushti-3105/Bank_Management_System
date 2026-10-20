@@ -1,0 +1,35 @@
+
+body {
+    /* font-family: Arial, sans-serif; */
+    margin: 50px;
+    background: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+}
+
+form, #search {
+    margin-bottom: 20px;
+}
+
+input, button {
+    padding: 10px;
+    margin: 5px;
+}
+
+button {
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgb(152, 155, 122);
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #f2e385;
+    text-align: left;
+}

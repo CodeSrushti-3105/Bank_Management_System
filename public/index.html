@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Bank Management System</h1>
+
+    <form id="dataForm">
+        <input type="text" id="accountNumber" placeholder="Enter account number" required>
+        <input type="text" id="accountHolder" placeholder="Enter account holder name" required>
+        <input type="number" id="balance" placeholder="Enter balance" required>
+        <button type="submit">Add Account</button>
+    </form>
+
+    <input type="text" id="search" placeholder="Search accounts">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Account Number</th>
+                <th>Account Holder</th>
+                <th>Balance</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="dataList"></tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
