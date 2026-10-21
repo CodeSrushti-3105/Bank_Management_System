@@ -1,9 +1,30 @@
 let records = [];
 let editId = null;
 
+// Check if user is logged in
+const token = localStorage.getItem("token");
+if (!token) {
+    window.location.href = "login.html";
+}
+
+// Logout function
+function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "login.html";
+}
+
 // Load all records from server
 async function loadRecords() {
-    const res = await fetch("/api/records");
+    const res = await fetch("/api/records", {
+        headers: { "Authorization": token }
+    });
+    
+    if (res.status === 401) {
+        alert("Session expired. Please login again.");
+        logout();
+        return;
+    }
+    
     records = await res.json();
     showRecords();
 }
@@ -18,7 +39,7 @@ function showRecords(list = records) {
             <tr>
                 <td>${record.accountNumber}</td>
                 <td>${record.accountHolder}</td>
-                <td>$${record.balance}</td>
+                <td>${record.balance}</td>
                 <td>
                     <button onclick="editRecord('${record._id}', '${record.accountNumber}', '${record.accountHolder}', ${record.balance})">Edit</button>
                     <button onclick="deleteRecord('${record._id}')">Delete</button>
@@ -41,7 +62,10 @@ document.getElementById("dataForm").addEventListener("submit", async function(e)
 
     await fetch(url, {
         method: method,
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+            "Content-Type": "application/json",
+            "Authorization": token
+        },
         body: JSON.stringify({ accountNumber, accountHolder, balance })
     });
 
@@ -61,7 +85,10 @@ function editRecord(id, accountNumber, accountHolder, balance) {
 // Delete record
 async function deleteRecord(id) {
     if (confirm("Delete this account?")) {
-        await fetch(`/api/records/${id}`, { method: "DELETE" });
+        await fetch(`/api/records/${id}`, { 
+            method: "DELETE",
+            headers: { "Authorization": token }
+        });
         loadRecords();
     }
 }

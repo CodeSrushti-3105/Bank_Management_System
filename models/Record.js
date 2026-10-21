@@ -5,7 +5,8 @@ const mongoose = require("mongoose");
 const recordSchema = new mongoose.Schema({
     accountNumber: { type: String, required: true },
     accountHolder: { type: String, required: true },
-    balance: { type: Number, required: true }
+    balance: { type: Number, required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, required: true }
 });
 
 // Export model
